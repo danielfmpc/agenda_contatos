@@ -1,6 +1,6 @@
 # agenda_contatos
 
-A new Flutter project.
+Agenda de contatos
 
 ## Getting Started
 
