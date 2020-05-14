@@ -7,7 +7,9 @@ final String phoneColumn = "phoneColumn";
 final String imgColumn = "imgColumn";
 
 class ContactHelper {
-  
+  static final ContactHelper _instance = ContactHelper.internal();
+  factory ContactHelper() => _instance;
+  ContactHelper.internal();
 }
 
 class Contact {
