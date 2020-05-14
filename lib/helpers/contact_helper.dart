@@ -47,7 +47,7 @@ class ContactHelper {
     Database dbContact = await db;
     List<Map> maps = await dbContact.query(contactsTable,
       columns: [idColumn, nameColumn, emailColumn, phoneColumn, imgColumn],
-      where: "$idColumn = 1",
+      where: "$idColumn = ?",
       whereArgs: [id],
     );  
     if (maps.length > 0) {
