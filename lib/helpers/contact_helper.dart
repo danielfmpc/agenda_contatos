@@ -24,6 +24,7 @@ class ContactHelper {
       return _db;
     }
   }
+  
   Future<Database> initDb() async {
     final databasePath = await getDatabasesPath();
     final path = join(databasePath, "contacts.db");
@@ -34,6 +35,26 @@ class ContactHelper {
         "$phoneColumn TEXT, $imgColumn TEXT)"
       );
     });
+  }
+
+  Future<Contact> saveContact(Contact contact) async {
+    Database dbContact = await db;
+    contact.id = await dbContact.insert(contactsTable, contact.toMap());
+    return contact;
+  }
+
+  Future<Contact> getContact(int id) async {
+    Database dbContact = await db;
+    List<Map> maps = await dbContact.query(contactsTable,
+      columns: [idColumn, nameColumn, emailColumn, phoneColumn, imgColumn],
+      where: "$idColumn = 1",
+      whereArgs: [id],
+    );  
+    if (maps.length > 0) {
+      return Contact.fromMap(maps.first);
+    } else {
+      return null;
+    }
   }
 }
 
