@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:agenda_contatos/helpers/contact_helper.dart';
+import 'package:agenda_contatos/ui/contact_page.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -35,7 +36,9 @@ class _HomeState extends State<Home> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.red,
         child: Icon(Icons.add),
-        onPressed: (){},
+        onPressed: (){
+          _showContactPage();
+        },
       ),
       body: ListView.builder(
         padding: EdgeInsets.all(10),
@@ -46,11 +49,13 @@ class _HomeState extends State<Home> {
       ),
     );
   }
+
   Widget _contactCard(BuildContext context, int index){
     return GestureDetector(
-      onTap: (){},
-      child: Card(
-        
+      onTap: (){
+        _showContactPage(contact: contacts[index]);
+      },
+      child: Card(        
         child: Padding(
           padding: EdgeInsets.all(10),
           child: Row(
@@ -98,6 +103,14 @@ class _HomeState extends State<Home> {
           ),
         ),
       ),
+    );
+  }
+  void _showContactPage({Contact contact}){
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ContactPage(contact: contact,)
+      )
     );
   }
 }
