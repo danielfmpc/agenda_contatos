@@ -17,8 +17,10 @@ class _ContactPageState extends State<ContactPage> {
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _phoneController = TextEditingController();
+
   bool _userEdit = false;
   Contact _editContact;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -27,19 +29,20 @@ class _ContactPageState extends State<ContactPage> {
       _editContact = Contact();
     } else {
       _editContact = Contact.fromMap(widget.contact.toMap());
-      setState(() {
+    
         _nameController.text = _editContact.name;
         _emailController.text = _editContact.email;
         _phoneController.text = _editContact.phone;
-      });
+
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(_editContact ?? "Novo contato"),
+        title: Text(_editContact.name ?? "Novo contato"),
         centerTitle: true,
         backgroundColor: Colors.red
       ),     
