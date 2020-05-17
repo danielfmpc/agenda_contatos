@@ -127,7 +127,6 @@ class Contact {
   
   @override
   String toString() {
-    // TODO: implement toString
     super.toString();
     return "Contact: $id, name: $name, email: $email, phone: $phone, img: $img";
   }
