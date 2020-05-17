@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:agenda_contatos/helpers/contact_helper.dart';
 import 'package:agenda_contatos/ui/contact_page.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -117,7 +118,10 @@ class _HomeState extends State<Home> {
                   Padding(
                     padding: EdgeInsets.all(10),
                     child: FlatButton(
-                      onPressed: (){},
+                      onPressed: (){
+                        Navigator.pop(context);
+                        launch("tel: ${contacts[index].phone}");
+                      },
                       child: Text(
                         "Ligar",
                         style: TextStyle(
