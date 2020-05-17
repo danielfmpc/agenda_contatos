@@ -18,11 +18,7 @@ class _HomeState extends State<Home> {
   void initState() {
     // TODO: implement initState
     super.initState();    
-    helper.getAllContacts().then((list) {
-      setState(() {
-        contacts = list;
-      });
-    });
+    _getAllContacts();
   }
 
   @override
@@ -68,7 +64,7 @@ class _HomeState extends State<Home> {
                   image: DecorationImage(
                     image: contacts[index].img != null ?
                       FileImage(File(contacts[index].img)) :
-                      AssetImage("images/persong.png")
+                      AssetImage("images/person.png")
                   ),
                 ),                
               ),
@@ -105,12 +101,31 @@ class _HomeState extends State<Home> {
       ),
     );
   }
-  void _showContactPage({Contact contact}){
-    Navigator.push(
+  
+  _showContactPage({Contact contact})async{
+    final recContact = await Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => ContactPage(contact: contact,)
       )
     );
+    if (recContact != null) {
+      if (contact != null) {
+        await helper.updateContact(recContact);        
+      } else {
+        await helper.saveContact(recContact);
+      }
+      _getAllContacts();
+    } 
   }
+
+  void _getAllContacts(){
+    helper.getAllContacts().then((list) {
+      setState(() {
+        contacts = list;
+      });
+    });
+  }
+
+
 }
