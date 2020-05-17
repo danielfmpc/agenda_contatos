@@ -62,8 +62,7 @@ class _ContactPageState extends State<ContactPage> {
         ),
         body: SingleChildScrollView(
           padding: EdgeInsets.all(10),
-          child: Column(
-            
+          child: Column(            
             children: <Widget>[
               GestureDetector(
                 child: Container(
@@ -72,6 +71,7 @@ class _ContactPageState extends State<ContactPage> {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     image: DecorationImage(
+                      fit: BoxFit.cover,
                       image: _editContact.img != null ?
                         FileImage(File(_editContact.img)) :
                         AssetImage("images/person.png")
